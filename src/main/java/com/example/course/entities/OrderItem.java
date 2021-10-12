@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.example.course.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_order_item")
@@ -24,8 +25,7 @@ public class OrderItem implements Serializable{
 		this.quantity = quantity;
 		this.price = price;
 		id.setOrder(order);
-		id.setProduct(product);
-		
+		id.setProduct(product);		
 	}
 	
 	public Order getOrder() {
@@ -36,6 +36,7 @@ public class OrderItem implements Serializable{
 		id.setOrder(order);
 	}
 	
+	@JsonIgnore
 	public Product getProduct() {
 		return id.getProduct();
 	}
