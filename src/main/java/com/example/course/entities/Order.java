@@ -19,7 +19,6 @@ import javax.persistence.Table;
 
 import com.example.course.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_order")
@@ -99,7 +98,15 @@ public class Order implements Serializable {
 
 	public Set<OrderItem> getItems() {
 		return items;
-	}	
+	}
+	
+	public Double getTotal() {
+		double sum = 0;
+		for (OrderItem item : items) {
+			sum += item.getSubTotal();
+		}
+		return sum;
+	}
 
 	@Override
 	public int hashCode() {
